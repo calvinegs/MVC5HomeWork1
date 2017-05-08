@@ -126,6 +126,12 @@ namespace MVC5HomeWork1.Controllers
             return View(db.客戶統計資料);
         }
 
+        [HttpPost]
+        public ActionResult CustomerList(string 客戶名稱)
+        {
+            return View(this.db.客戶統計資料.Where(p => p.客戶名稱.Contains(客戶名稱)));
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

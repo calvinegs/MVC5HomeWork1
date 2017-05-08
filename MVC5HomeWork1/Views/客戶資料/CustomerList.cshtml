@@ -10,6 +10,12 @@
     @*@Html.ActionLink("Create New", "Create")*@
 </p>
 
+@using (Html.BeginForm("CustomerList", "客戶資料", FormMethod.Post))
+{
+    <span>客戶名稱:</span> @Html.TextBox("客戶名稱");
+    <input type="submit" name="search" />
+    <br />
+    <br />
 <table class="table">
     <tr>
         <th>
@@ -45,3 +51,4 @@
 }
 
 </table>
+}
