@@ -17,14 +17,14 @@ namespace MVC5HomeWork1.Controllers
         // GET: 客戶銀行資訊
         public ActionResult Index()
         {
-            var 客戶銀行資訊 = db.客戶銀行資訊.Include(p => p.客戶資料);
+            var 客戶銀行資訊 = db.客戶銀行資訊.Include(p => p.客戶資料).Where(p => p.是否已刪除 == false);
             return View(客戶銀行資訊.ToList());
         }
 
         [HttpPost]
         public ActionResult Index(string accountName)
         {
-            return View(this.db.客戶銀行資訊.Where(p => p.帳戶名稱.Contains(accountName)));
+            return View(this.db.客戶銀行資訊.Where(p => p.帳戶名稱.Contains(accountName) && p.是否已刪除 == false));
         }
 
         // GET: 客戶銀行資訊/Details/5
@@ -121,7 +121,8 @@ namespace MVC5HomeWork1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             客戶銀行資訊 客戶銀行資訊 = db.客戶銀行資訊.Find(id);
-            db.客戶銀行資訊.Remove(客戶銀行資訊);
+            //db.客戶銀行資訊.Remove(客戶銀行資訊);
+            客戶銀行資訊.是否已刪除 = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

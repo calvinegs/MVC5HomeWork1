@@ -17,14 +17,15 @@ namespace MVC5HomeWork1.Controllers
         // GET: 客戶聯絡人
         public ActionResult Index()
         {
-            var 客戶聯絡人 = db.客戶聯絡人.Include(p => p.客戶資料);
+            var 客戶聯絡人 = db.客戶聯絡人.Include(p => p.客戶資料)
+                            .Where(p => p.是否已刪除 == false);
             return View(客戶聯絡人.ToList());
         }
 
         [HttpPost]
         public ActionResult Index(string 聯絡人姓名)
         {
-            return View(this.db.客戶聯絡人.Where(p => p.姓名.Contains(聯絡人姓名)));
+            return View(this.db.客戶聯絡人.Where(p => p.姓名.Contains(聯絡人姓名) && p.是否已刪除 == false));
         }
 
         // GET: 客戶聯絡人/Details/5
@@ -121,7 +122,8 @@ namespace MVC5HomeWork1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
-            db.客戶聯絡人.Remove(客戶聯絡人);
+            //db.客戶聯絡人.Remove(客戶聯絡人);
+            客戶聯絡人.是否已刪除 = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
