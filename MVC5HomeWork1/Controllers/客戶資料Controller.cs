@@ -42,6 +42,7 @@ namespace MVC5HomeWork1.Controllers
         }
 
         // GET: 客戶資料/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -50,6 +51,7 @@ namespace MVC5HomeWork1.Controllers
         // POST: 客戶資料/Create
         // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
@@ -65,6 +67,7 @@ namespace MVC5HomeWork1.Controllers
         }
 
         // GET: 客戶資料/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,6 +85,7 @@ namespace MVC5HomeWork1.Controllers
         // POST: 客戶資料/Edit/5
         // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
@@ -96,6 +100,7 @@ namespace MVC5HomeWork1.Controllers
         }
 
         // GET: 客戶資料/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -111,6 +116,7 @@ namespace MVC5HomeWork1.Controllers
         }
 
         // POST: 客戶資料/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
