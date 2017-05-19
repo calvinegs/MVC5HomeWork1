@@ -18,17 +18,28 @@ namespace MVC5HomeWork1.Controllers
         客戶資料Repository repo1 = RepositoryHelper.Get客戶資料Repository();
 
         // GET: 客戶聯絡人
-        public ActionResult Index()
+        public ActionResult Index(string 聯絡人姓名, string 職稱)
         {
+            // Entityes DB
             //var 客戶聯絡人 = db.客戶聯絡人.Include(p => p.客戶資料)
             //                .Where(p => p.是否已刪除 == false);
-            var 客戶聯絡人 = this.repo.All().Include(p => p.客戶資料)
-                                .Where(p => p.是否已刪除 == false);
-            return View(客戶聯絡人.ToList());
+
+            // Repository
+            //var 客戶聯絡人 = this.repo.All().Include(p => p.客戶資料)
+            //                    .Where(p => p.是否已刪除 == false);
+            //return View(客戶聯絡人.ToList());
+            //return View(this.repo.All().Where(p => p.姓名.Contains(聯絡人姓名) && p.職稱.Contains(職稱) && p.是否已刪除 == false));
+
+            // 查詢
+            if ((聯絡人姓名 != null) && (職稱 != null))
+                ViewData.Model = this.repo.All().Where(p => p.姓名.Contains(聯絡人姓名) && p.職稱.Contains(職稱) && p.是否已刪除 == false);
+            else
+                ViewData.Model = this.repo.All();
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Index(string 聯絡人姓名, string 職稱)
+        public ActionResult Index1(string 聯絡人姓名, string 職稱)
         {
             //return View(this.db.客戶聯絡人.Where(p => p.姓名.Contains(聯絡人姓名) && p.職稱.Contains(職稱) && p.是否已刪除 == false));
             return View(this.repo.All().Where(p => p.姓名.Contains(聯絡人姓名) && p.職稱.Contains(職稱) && p.是否已刪除 == false));
