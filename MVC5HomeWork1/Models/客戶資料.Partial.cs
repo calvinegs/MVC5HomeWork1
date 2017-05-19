@@ -1,4 +1,4 @@
-namespace MVC5HomeWork1.Models
+﻿namespace MVC5HomeWork1.Models
 {
     using System;
     using System.Collections.Generic;

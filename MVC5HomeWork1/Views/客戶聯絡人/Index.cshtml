@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MVC5HomeWork1.Models.客戶聯絡人>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "客戶聯絡人清單";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,6 +13,7 @@
 @using (Html.BeginForm("Index", "客戶聯絡人", FormMethod.Post))
 {
     <span>聯絡人姓名</span>@Html.TextBox("聯絡人姓名");
+    <span>職稱</span>@Html.TextBox("職稱");
     <input type="submit" name="Search" />
     <br />
     <br />
