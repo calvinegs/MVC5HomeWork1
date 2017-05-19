@@ -23,17 +23,36 @@ namespace MVC5HomeWork1.Controllers
         public ActionResult Index()
         {
             //return View(db.客戶資料.ToList().Where(p => p.是否已刪除 == false));
+
+            GetCategoryData();
+
             return View(repo.All()
                 .Where(p => p.是否已刪除 == false));
         }
 
-        [HttpPost]
-        public ActionResult Index(string customerName)
+        private void GetCategoryData()
         {
-            //return View(db.客戶資料.Where(p => p.客戶名稱.Contains(customerName) && p.是否已刪除 == false));
-            return View(repo.All()
-                .Where(p => p.客戶名稱.Contains(customerName) && p.是否已刪除 == false));
+            //var categoryQry = repo.All().Select(p => p.客戶分類).Distinct();
+            //SelectList categoryList = new SelectList(categoryQry);
+
+            //SelectList categoryList = this.repo.GetCategory();
+            ViewBag.客戶分類 = this.repo.GetCategory();
         }
+
+        [HttpPost]
+        public ActionResult Index(string customerName, string 客戶分類)
+        {
+            // Using Entities DB
+            //return View(db.客戶資料.Where(p => p.客戶名稱.Contains(customerName) && p.是否已刪除 == false));
+
+            GetCategoryData();
+
+            // Using Repository
+            ViewData.Model = this.repo.GetCustomerData(customerName, 客戶分類);
+
+            return View();
+        }
+
 
         // GET: 客戶資料/Details/5
         public ActionResult Details(int? id)

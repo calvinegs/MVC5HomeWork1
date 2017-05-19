@@ -10,7 +10,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm("Index", "客戶聯絡人", FormMethod.Post))
+@using (Html.BeginForm("Index", "客戶聯絡人", FormMethod.Get))
 {
     <span>聯絡人姓名</span>@Html.TextBox("聯絡人姓名");
     <span>職稱</span>@Html.TextBox("職稱");
