@@ -16,6 +16,11 @@ namespace MVC5HomeWork1.Models
         {
             this.UnitOfWork.Context.Entry(cutomerContract).State = EntityState.Modified;
         }
+        public override void Delete(客戶聯絡人 entity)
+        {
+            entity.是否已刪除 = true;
+            //base.Delete(entity);
+        }
     }
 
     public  interface I客戶聯絡人Repository : IRepository<客戶聯絡人>

@@ -35,6 +35,11 @@ namespace MVC5HomeWork1.Models
                     .Where(p => p.客戶名稱.Contains(customerName) & p.客戶分類 == 客戶分類 && p.是否已刪除 == false);
             return CustomerData;
         }
+        public override void Delete(客戶資料 entity)
+        {
+            entity.是否已刪除 = true;
+            //base.Delete(entity);
+        }
 
     }
 

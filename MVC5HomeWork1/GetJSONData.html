@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+        function Test(id) {
+            return id;
+        }
+        function GetJson(id) {
+            $.ajax({
+                url: '/Home/JSON/',
+                type: 'GET',
+                dataType: 'json',
+                cache: false,
+                data: { 'id': id },
+                success: function (id) {
+                    return id;
+                    //alert('Success!');
+                },
+                error: function () {
+                    alert('Error occured');
+                }
+            });
+        }
+        function CallService(id) {
+            $.ajax({
+                url: '/Home/CallService/")',
+                type: 'GET',
+                dataType: 'json',
+                cache: false,
+                data: { 'id': id },
+                success: function (color) {
+                    return color;
+                },
+                error: function () {
+                    alert('Error occured');
+                }
+            });
+        }
+
+        $.postJSON = function(url, data, callback)
+        {
+            $post(url, data, callback, "json")
+        }
+    </script>
+</head>
+<body>
+    <input id="Button1" type="button" value="button" onclick="alert(CallService('222'));" />
+</body>
+</html>

@@ -176,6 +176,7 @@
     <Compile Include="Controllers\客戶聯絡人Controller.cs" />
     <Compile Include="Controllers\客戶資料Controller.cs" />
     <Compile Include="Controllers\客戶銀行資訊Controller.cs" />
+    <Compile Include="Controllers\宣告客戶分類的SelectList物件Attribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -274,6 +275,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="GetJSONData.html" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\Customer.Context.tt">
@@ -307,6 +309,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -367,6 +371,7 @@
     <Content Include="Views\客戶資料\CustomerList.cshtml" />
     <Content Include="Views\Shared\Error_DbEntityValidationException.cshtml" />
     <Content Include="Views\Shared\Error_DbUpdateException.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\客戶分類.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

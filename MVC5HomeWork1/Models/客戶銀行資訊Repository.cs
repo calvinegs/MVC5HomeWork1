@@ -15,6 +15,12 @@ namespace MVC5HomeWork1.Models
         {
             this.UnitOfWork.Context.Entry(cutomerBank).State = EntityState.Modified;
         }
+        public override void Delete(客戶銀行資訊 entity)
+        {
+            entity.是否已刪除 = true;
+            //base.Delete(entity);
+        }
+
     }
 
     public  interface I客戶銀行資訊Repository : IRepository<客戶銀行資訊>

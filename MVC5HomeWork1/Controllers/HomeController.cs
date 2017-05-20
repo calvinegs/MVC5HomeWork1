@@ -26,5 +26,26 @@ namespace MVC5HomeWork1.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult JSON(string id)
+        {
+            return Json(new
+            {
+                id = id,
+                name = "Teacher Will",
+                CreateOn = DateTime.Now
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult CallService(string id)
+        {
+            //var idNum = Convert.ToInt32(id);
+            //var StationService = new getStationStatus.Service1SoapClient("Service1Soap");
+            //string color = StationService.getStationStatus(idNum);
+            //return Json(color, JsonRequestBehavior.AllowGet);
+            return Json(new { id = "000000" });
+        }
     }
 }

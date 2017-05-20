@@ -17,35 +17,148 @@ namespace MVC5HomeWork1.Controllers
         //private 客戶資料Entities db = new 客戶資料Entities();
         客戶資料Repository repo = RepositoryHelper.Get客戶資料Repository();
 
-        客戶統計資料Repository repo1 = RepositoryHelper.Get客戶統計資料Repository();
+        客戶統計資料Repository repo1; // = RepositoryHelper.Get客戶統計資料Repository();
+
+        public 客戶資料Controller()
+        {
+            repo1 = RepositoryHelper.Get客戶統計資料Repository(repo.UnitOfWork);
+        }
 
         // GET: 客戶資料
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(string sortBy, string currentSort)
         {
             //return View(db.客戶資料.ToList().Where(p => p.是否已刪除 == false));
 
-            GetCategoryData();
-
-            return View(repo.All()
-                .Where(p => p.是否已刪除 == false));
-        }
-
-        private void GetCategoryData()
-        {
-            //var categoryQry = repo.All().Select(p => p.客戶分類).Distinct();
-            //SelectList categoryList = new SelectList(categoryQry);
-
-            //SelectList categoryList = this.repo.GetCategory();
             ViewBag.客戶分類 = this.repo.GetCategory();
+
+            ViewBag.CurrentSort = sortBy;
+
+            sortBy = string.IsNullOrEmpty(sortBy) ? "客戶名稱" : sortBy;
+
+            switch (sortBy)
+            {
+                case "客戶名稱":
+                    if (sortBy.Equals(currentSort))
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderByDescending(p => p.客戶名稱);
+                        ViewBag.CurrentSort = null;
+                    }
+                    else
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderBy(p => p.客戶名稱);
+                    }
+                    break;
+                case "統一編號":
+                    if (sortBy.Equals(currentSort))
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderByDescending(p => p.統一編號);
+                        ViewBag.CurrentSort = null;
+                    }
+                    else
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderBy(p => p.統一編號);
+                    }
+                    break;
+                case "電話":
+                    if (sortBy.Equals(currentSort))
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderByDescending(p => p.電話);
+                        ViewBag.CurrentSort = null;
+                    }
+                    else
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderBy(p => p.電話);
+                    }
+                    break;
+                case "傳真":
+                    if (sortBy.Equals(currentSort))
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderByDescending(p => p.傳真);
+                        ViewBag.CurrentSort = null;
+                    }
+                    else
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderBy(p => p.傳真);
+                    }
+                    break;
+                case "地址":
+                    if (sortBy.Equals(currentSort))
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderByDescending(p => p.地址);
+                        ViewBag.CurrentSort = null;
+                    }
+                    else
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderBy(p => p.地址);
+                    }
+                    break;
+                case "Email":
+                    if (sortBy.Equals(currentSort))
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderByDescending(p => p.Email);
+                        ViewBag.CurrentSort = null;
+                    }
+                    else
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderBy(p => p.Email);
+                    }
+                    break;
+                case "客戶分類":
+                    if (sortBy.Equals(currentSort))
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderByDescending(p => p.客戶分類);
+                        ViewBag.CurrentSort = null;
+                    }
+                    else
+                    {
+                        ViewData.Model = repo.All()
+                            .Where(p => p.是否已刪除 == false)
+                            .OrderBy(p => p.客戶分類);
+                    }
+                    break;
+            }
+
+            //ViewData.Model = repo.All()
+            //    .Where(p => p.是否已刪除 == false);
+
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Index(string customerName, string 客戶分類)
+        public ActionResult Index(string customerName, string 客戶分類, string sortBy, string CurrentSort)
         {
             // Using Entities DB
             //return View(db.客戶資料.Where(p => p.客戶名稱.Contains(customerName) && p.是否已刪除 == false));
 
-            GetCategoryData();
+            ViewBag.客戶分類 = this.repo.GetCategory();
+
 
             // Using Repository
             ViewData.Model = this.repo.GetCustomerData(customerName, 客戶分類);
@@ -72,8 +185,10 @@ namespace MVC5HomeWork1.Controllers
 
         // GET: 客戶資料/Create
         //[Authorize]
+        [宣告客戶分類的SelectList物件]
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -82,6 +197,7 @@ namespace MVC5HomeWork1.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         //[Authorize]
         [HttpPost]
+        [宣告客戶分類的SelectList物件]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
         {
@@ -99,6 +215,7 @@ namespace MVC5HomeWork1.Controllers
 
         // GET: 客戶資料/Edit/5
         //[Authorize]
+        [宣告客戶分類的SelectList物件]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -119,14 +236,22 @@ namespace MVC5HomeWork1.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         //[Authorize]
         [HttpPost]
+        [宣告客戶分類的SelectList物件]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
+        //public ActionResult Edit([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
+        public ActionResult Edit(int id, FormCollection form)
         {
-            if (ModelState.IsValid)
+            var 客戶資料 = repo.Get單筆資料By客戶Id(id);
+            if (客戶資料 == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (TryUpdateModel(客戶資料))
             {
                 //db.Entry(客戶資料).State = EntityState.Modified;
                 //db.SaveChanges();
-                repo.Update(客戶資料);
+                //repo.Update(客戶資料);
                 repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
@@ -187,13 +312,13 @@ namespace MVC5HomeWork1.Controllers
             return View(repo1.All().Where(p => p.客戶名稱.Contains(客戶名稱)));
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                repo.UnitOfWork.Context.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

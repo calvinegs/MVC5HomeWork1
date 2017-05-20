@@ -14,8 +14,12 @@ namespace MVC5HomeWork1.Controllers
     {
         //private 客戶資料Entities db = new 客戶資料Entities();
         客戶銀行資訊Repository repo =  RepositoryHelper.Get客戶銀行資訊Repository();
-        客戶資料Repository repo1 = RepositoryHelper.Get客戶資料Repository();
+        客戶資料Repository repo1;   // = RepositoryHelper.Get客戶資料Repository();
 
+        public 客戶銀行資訊Controller()
+        {
+            repo1 = RepositoryHelper.Get客戶資料Repository(repo.UnitOfWork);
+        }
         // GET: 客戶銀行資訊
         public ActionResult Index()
         {
@@ -94,13 +98,19 @@ namespace MVC5HomeWork1.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,客戶Id,銀行名稱,銀行代碼,分行代碼,帳戶名稱,帳戶號碼")] 客戶銀行資訊 客戶銀行資訊)
+        public ActionResult Edit(int id, FormCollection form)
         {
-            if (ModelState.IsValid)
+            var 客戶銀行資訊 = repo.Get單筆資料By客戶Id(id);
+            if (客戶銀行資訊 == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (TryUpdateModel(客戶銀行資訊))
             {
                 //db.Entry(客戶銀行資訊).State = EntityState.Modified;
                 //db.SaveChanges();
-                this.repo.Update(客戶銀行資訊);
+                //this.repo.Update(客戶銀行資訊);
                 this.repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
@@ -131,20 +141,21 @@ namespace MVC5HomeWork1.Controllers
         {
             客戶銀行資訊 客戶銀行資訊 = this.repo.Get單筆資料By客戶Id(id);  // db.客戶銀行資訊.Find(id);
             //db.客戶銀行資訊.Remove(客戶銀行資訊);
-            客戶銀行資訊.是否已刪除 = true;
-            //db.SaveChanges();
-            this.repo.Update(客戶銀行資訊);
+            //客戶銀行資訊.是否已刪除 = true;
+            //this.repo.Update(客戶銀行資訊);
+
+            this.repo.Delete(客戶銀行資訊);
             this.repo.UnitOfWork.Commit();
             return RedirectToAction("Index");
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                repo.UnitOfWork.Context.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

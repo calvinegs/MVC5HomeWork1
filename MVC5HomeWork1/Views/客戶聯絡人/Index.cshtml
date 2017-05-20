@@ -21,22 +21,28 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.職稱)
+            @*@Html.DisplayNameFor(model => model.職稱)*@
+            @Html.ActionLink("職稱", "Index", new { sortBy = "職稱", currentSort = ViewBag.CurrentSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.姓名)
+            @*@Html.DisplayNameFor(model => model.姓名)*@
+            @Html.ActionLink("姓名", "Index", new { sortBy = "姓名", currentSort = ViewBag.CurrentSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @*@Html.DisplayNameFor(model => model.Email)*@
+            @Html.ActionLink("Email", "Index", new { sortBy = "Email", currentSort = ViewBag.CurrentSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.手機)
+            @*@Html.DisplayNameFor(model => model.手機)*@
+            @Html.ActionLink("手機", "Index", new { sortBy = "手機", currentSort = ViewBag.CurrentSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.電話)
+            @*@Html.DisplayNameFor(model => model.電話)*@
+            @Html.ActionLink("電話", "Index", new { sortBy = "電話", currentSort = ViewBag.CurrentSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.客戶資料.客戶名稱)
+            @*@Html.DisplayNameFor(model => model.客戶資料.客戶名稱)*@
+            @Html.ActionLink("客戶名稱", "Index", new { sortBy = "客戶名稱", currentSort = ViewBag.CurrentSort })
         </th>
         <th></th>
     </tr>
